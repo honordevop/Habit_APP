@@ -1,55 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import "./Rewards.css"
+import axios from "axios"
 
 function Rewards() {
 
-    const [rewards, setReward] = useState([
-        {
-            id: 1,
-            reward: "500 points for drinking 8 cups of water for 7 straight days",
-            month: "January"
-        },
-        {
-            id: 2,
-            reward: "850 points for fasting for 5 days straight",
-            month: "January"
-        },
-        {
-            id: 3,
-            reward: "250 points for exercising for 3 straight days",
-            month: "January"
-        },
-        {
-            id: 4,
-            reward: "5000 points for getting a new job",
-            month: "Feburary"
-        },
-        {
-            id: 5,
-            reward: "100 points for waking up early",
-            month: "Feburary"
-        },
-        {
-            id: 6,
-            reward: "1250 points for making a new project",
-            month: "March"
-        },
-        {
-            id: 7,
-            reward: "500 points for practicing basketball",
-            month: "March"
-        },
-        {
-            id: 8,
-            reward: "5 points for staring into a wall for 30 seconds",
-            month: "March"
-        },
-        {
-            id: 9,
-            reward: "1000 points for taking a cold shower for 10 straight days",
-            month: "March"
-        }
-    ]);
+    const [rewards, setReward] = useState<{
+        id: number,
+        reward: string,
+        month: string
+    }[]>([]);
 
     const [filteredRewards, setFilteredRewards] = useState(rewards);
     const [filter, setFilter] = useState("All");
@@ -60,7 +19,17 @@ function Rewards() {
             return reward.month === filter
         });
         setFilteredRewards(updatedFilterRewards);
-    }, [filter])
+    }, [filter, rewards]);
+
+    useEffect(() => {
+        fetchRewards()
+    }, []);
+
+    const fetchRewards = async () => {
+        const response = await axios.get("http://localhost:4000/rewards");
+        console.log(response)
+        setReward(response.data)
+    }
 
     return (
         <div className="Rewards">

@@ -11,6 +11,7 @@ function SideNav() {
             <Link to="/habits" className={`SideNav-list-items ${slug.pathname === "/habits" && "SideNav-list-items--active"}`}>Habit</Link>
             <Link to="/accomplishments" className={`SideNav-list-items ${slug.pathname === "/accomplishments" && "SideNav-list-items--active"}`}>Accomplishments</Link>
             <Link to="/elements" className={`SideNav-list-items ${slug.pathname === "/elements" && "SideNav-list-items--active"}`}>Elements</Link>
+            <Link to="/rewards" className={`SideNav-list-items ${slug.pathname === "/rewards" && "SideNav-list-items--active"}`}>Rewards</Link>
         </div>
     )
 }
